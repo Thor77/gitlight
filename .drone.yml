@@ -1,0 +1,67 @@
+# CI Test 01
+pipeline:
+
+  tests_debian_stable:
+    group: tests
+    image: index.docker.io/library/debian:stable
+    pull: true
+    commands:
+      - 'virtualenv /tmp/.venv'
+      - '. /tmp/.venv/bin/activate'
+      - 'pip install -r requirements/tests.txt'
+      - 'python ./manage.py tests'
+    branches: master
+    when:
+      event: [ push, pull_request ]
+
+  tests_debian_testing:
+    group: tests
+    image: index.docker.io/library/debian:testing
+    pull: true
+    commands:
+      - 'virtualenv /tmp/.venv'
+      - '. /tmp/.venv/bin/activate'
+      - 'pip install -r requirements/tests.txt'
+      - 'python ./manage.py tests'
+    branches: master
+    when:
+      event: [ push, pull_request ]
+
+  #lint:
+  #  group: batch
+  #  image: index.docker.io/library/debian:stable
+  #  pull: true
+  #  commands:
+  #    - 'virtualenv /tmp/.venv'
+  #    - '. /tmp/.venv/bin/activate'
+  #    - 'pip install -r requirements/tests.txt'
+  #    - 'python ./manage.py tests'
+  #  branches: master
+  #  when:
+  #    event: [ push, pull_request ]
+
+  #docs:
+  #  group: batch
+  #  image: index.docker.io/library/debian:stable
+  #  pull: true
+  #  commands:
+  #    - 'virtualenv /tmp/.venv'
+  #    - '. /tmp/.venv/bin/activate'
+  #    - 'pip install -r requirements/docs.txt'
+  #    - 'python ./manage.py docs'
+  #  branches: master
+  #  when:
+  #    event: [ push, pull_request ]
+
+  #coverage:
+  #  group: batch
+  #  image: index.docker.io/library/debian:stable
+  #  pull: true
+  #  commands:
+  #    - 'virtualenv /tmp/.venv'
+  #    - '. /tmp/.venv/bin/activate'
+  #    - 'pip install -r requirements/all.txt'
+  #    - 'python ./manage.py coverage'
+  #  branches: master
+  #  when:
+  #    event: [ push, pull_request ]

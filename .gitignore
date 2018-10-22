@@ -1,0 +1,13 @@
+conf/*
+!conf/testing
+!conf/production
+doc/_build/**
+
+*.py[co]
+*.sw
+*~
+*.wp*
+*#
+*.DS_Store
+.pytest_cache
+Pipfile.lock
