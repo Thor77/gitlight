@@ -3,8 +3,12 @@ GitLight
 
 GitLight is a simple/lightweight collaboration tool built on top of Gitolite3.
 
-<!--<p align="center"><img src="https://raw.githubusercontent.com/gitlight/gitlight/master/app/static/images/gitlight-logo.png" width="128px"><p>-->
+<p align="center">
+<img src="https://raw.githubusercontent.com/gitlight/gitlight/master/assets/gitlight-logo.png" width="128px">
+<p>
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![Python](https://img.shields.io/badge/python-v3.6-blue.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/gitlight/gitlight.svg)](https://github.com/gitlight/gitlight/issues)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
