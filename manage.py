@@ -14,9 +14,9 @@ def test():
     from subprocess import call
 
     os.environ['FLASK_CONFIG'] = 'testing'
-    call(['nosetests', '-v',
-          '--with-coverage', '--cover-package=app', '--cover-branches',
-          '--cover-erase', '--cover-html', '--cover-html-dir=cover'])
+    #call(['nosetests', '-v',
+    #      '--with-coverage', '--cover-package=app', '--cover-branches',
+    #      '--cover-erase', '--cover-html', '--cover-html-dir=cover'])
 
 
 if __name__ == '__main__':
