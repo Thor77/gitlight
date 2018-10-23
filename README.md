@@ -10,7 +10,7 @@ GitLight is a simple/lightweight collaboration tool built on top of Gitolite3.
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![Documentation](https://readthedocs.org/projects/gitlight/badge/?version=latest)](https://docs.gitlight.io)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://opensource.org/licenses/gpl-3.0.html)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/52fca2eb2dcb4039aacca674133eb4cd)](https://www.codacy.com/app/MTecknology/gitlight?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gitlight/gitlight&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd45fe586bad43ac833c19abc00f276d)](https://www.codacy.com/app/MTecknology/gitlight?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gitlight/gitlight&amp;utm_campaign=Badge_Grade)
 
 Running GitLight
 ----------------
