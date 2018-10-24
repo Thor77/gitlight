@@ -7,32 +7,19 @@ platform:
 
 steps:
 
-  - name: tests_debian_stable
-    image: index.docker.io/library/debian:stable
+  - name: tests_debian
+    image: gitlight/deb-stable-py3
     pull: true
     commands:
-      - apt-cache search python
-      - pip install -r requirements/tests.txt
-      - make test
-    branches: master
-    when:
-      event: [ push, pull_request ]
-
-  - name: tests_debian_testing
-    image: index.docker.io/library/debian:testing
-    pull: true
-    commands:
-      - apt-get install -y python-virtualenv
-      - virtualenv -p 3 /tmp/.venv
-      - . /tmp/.venv/bin/activate
-      - pip install -r requirements/tests.txt
+      - . /venv/testenv/bin/activate
+      - pip3 install -r requirements/tests.txt
       - make test
     branches: master
     when:
       event: [ push, pull_request ]
 
   #- name: lint
-  #  image: index.docker.io/library/debian:stable
+  #  image: gitlight/deb-stable-py3
   #  pull: true
   #  commands:
   #    - 'virtualenv /tmp/.venv'
@@ -44,7 +31,7 @@ steps:
   #    event: [ push, pull_request ]
 
   #- name: docs
-  #  image: index.docker.io/library/debian:stable
+  #  image: gitlight/deb-stable-py3
   #  pull: true
   #  commands:
   #    - 'virtualenv /tmp/.venv'
@@ -56,13 +43,11 @@ steps:
   #    event: [ push, pull_request ]
 
   - name: coverage
-    image: index.docker.io/library/debian:testing
+    image: gitlight/deb-stable-py3
     pull: true
     commands:
-      - apt-get install -y python-virtualenv
-      - virtualenv -p 3 /tmp/.venv
-      - . /tmp/.venv/bin/activate
-      - pip install -r requirements/tests.txt
+      - . /venv/testenv/bin/activate
+      - pip3 install -r requirements/tests.txt
       - make coverage-text
     branches: master
     when:

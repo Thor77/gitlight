@@ -21,7 +21,7 @@ Running GitLight
 
 Prerequisites:
 
--   [Gitolite3 Installed/Configured]((https://docs.gitlight.io/walkthrough/gitolite)
+-   [Gitolite3 Installed/Configured](https://docs.gitlight.io/walkthrough/gitolite)
 
 GitLight can be run in either [production](https://docs.gitlight.io/walkthrough/deployment)
 or [development](https://docs.gitlight.io/hacking/development) modes.
