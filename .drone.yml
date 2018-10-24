@@ -11,11 +11,8 @@ steps:
     image: index.docker.io/library/debian:stable
     pull: true
     commands:
-      - apt-cache search virtualenv
-      - apt-get install -y python-virtualenv
-      - virtualenv -p 3 /tmp/.venv
-      - . /tmp/.venv/bin/activate
-      - pip install -r requirements/tests.txt
+      - apt-cache search pip
+      - pip3 install -r requirements/tests.txt
       - make test
     branches: master
     when:
