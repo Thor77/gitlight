@@ -11,11 +11,10 @@ steps:
     image: index.docker.io/library/debian:stable
     pull: true
     commands:
-      - 'echo true'
-      #- 'virtualenv /tmp/.venv'
-      #- '. /tmp/.venv/bin/activate'
-      #- 'pip install -r requirements/tests.txt'
-      #- 'python ./manage.py tests'
+      - virtualenv -p 3 /tmp/.venv
+      - . /tmp/.venv/bin/activate
+      - pip install -r requirements/tests.txt
+      - make test
     branches: master
     when:
       event: [ push, pull_request ]
@@ -24,11 +23,10 @@ steps:
     image: index.docker.io/library/debian:testing
     pull: true
     commands:
-      - 'true'
-      #- 'virtualenv /tmp/.venv'
-      #- '. /tmp/.venv/bin/activate'
-      #- 'pip install -r requirements/tests.txt'
-      #- 'python ./manage.py tests'
+      - virtualenv -p 3 /tmp/.venv
+      - . /tmp/.venv/bin/activate
+      - pip install -r requirements/tests.txt
+      - make test
     branches: master
     when:
       event: [ push, pull_request ]

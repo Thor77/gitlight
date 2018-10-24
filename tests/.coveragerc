@@ -1,0 +1,16 @@
+[run]
+branch = True
+data_file = _build/.coverage
+include =
+    gitlight
+omit =
+    */conf/*
+    */lib/python*
+
+[report]
+ignore_errors = False
+sort = Miss
+
+[html]
+title = GitLight Code Coverage
+directory = _build/htmlcov

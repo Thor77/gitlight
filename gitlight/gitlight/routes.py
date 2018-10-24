@@ -1,8 +1,7 @@
 '''
 GitLight - Application Routes
 '''
-#from flask import request, render_template
-from flask import render_template
+from flask import render_template  # request
 from . import gitlight
 
 @gitlight.route('/', methods=['GET'])
