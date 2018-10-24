@@ -11,7 +11,8 @@ steps:
     image: index.docker.io/library/debian:stable
     pull: true
     commands:
-      - apt-get install -y python3-virtualenv
+      - apt-cache search virtualenv
+      - apt-get install -y python-virtualenv
       - virtualenv -p 3 /tmp/.venv
       - . /tmp/.venv/bin/activate
       - pip install -r requirements/tests.txt
@@ -24,7 +25,7 @@ steps:
     image: index.docker.io/library/debian:testing
     pull: true
     commands:
-      - apt-get install -y python3-virtualenv
+      - apt-get install -y python-virtualenv
       - virtualenv -p 3 /tmp/.venv
       - . /tmp/.venv/bin/activate
       - pip install -r requirements/tests.txt
@@ -57,14 +58,15 @@ steps:
   #  when:
   #    event: [ push, pull_request ]
 
-  #- name: coverage
-  #  image: index.docker.io/library/debian:stable
-  #  pull: true
-  #  commands:
-  #    - 'virtualenv /tmp/.venv'
-  #    - '. /tmp/.venv/bin/activate'
-  #    - 'pip install -r requirements/all.txt'
-  #    - 'python ./manage.py coverage'
-  #  branches: master
-  #  when:
-  #    event: [ push, pull_request ]
+  - name: coverage
+    image: index.docker.io/library/debian:testing
+    pull: true
+    commands:
+      - apt-get install -y python-virtualenv
+      - virtualenv -p 3 /tmp/.venv
+      - . /tmp/.venv/bin/activate
+      - pip install -r requirements/tests.txt
+      - make coverage-text
+    branches: master
+    when:
+      event: [ push, pull_request ]
