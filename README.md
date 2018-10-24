@@ -25,3 +25,16 @@ Prerequisites:
 
 GitLight can be run in either [production](https://docs.gitlight.io/walkthrough/deployment)
 or [development](https://docs.gitlight.io/hacking/development) modes.
+
+Resources
+---------
+
+Until the website/docs become useful...
+
+-   [Drone CI](https://ci.gitlight.io/)
+-   [GL Docs](https://docs.gitlight.io/)
+-   [GS Site](https://www.gitlight.io/)
+-   [Codacy](https://app.codacy.com/project/MTecknology/gitlight/dashboard)
+-   [Docker Hub](https://hub.docker.com/u/gitlight/dashboard/)
+-   [Live Instance](http://git.gitlight.io/)
+-   [Live Instance (web cert)](http://git-tls.gitlight.io/)
