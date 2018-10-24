@@ -11,8 +11,8 @@ steps:
     image: index.docker.io/library/debian:stable
     pull: true
     commands:
-      - apt-cache search pip
-      - pip3 install -r requirements/tests.txt
+      - apt-cache search python
+      - pip install -r requirements/tests.txt
       - make test
     branches: master
     when:
