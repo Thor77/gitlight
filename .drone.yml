@@ -11,6 +11,7 @@ steps:
     image: index.docker.io/library/debian:stable
     pull: true
     commands:
+      - apt-get install -y python3-virtualenv
       - virtualenv -p 3 /tmp/.venv
       - . /tmp/.venv/bin/activate
       - pip install -r requirements/tests.txt
@@ -23,6 +24,7 @@ steps:
     image: index.docker.io/library/debian:testing
     pull: true
     commands:
+      - apt-get install -y python3-virtualenv
       - virtualenv -p 3 /tmp/.venv
       - . /tmp/.venv/bin/activate
       - pip install -r requirements/tests.txt
