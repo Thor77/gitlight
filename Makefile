@@ -15,13 +15,13 @@ clean:
 # Run a development web server
 #   -r requirements/base.txt
 run:
-	export FLASK_APP=gitlight
 	export FLASK_ENV=development
 	flask run
 
 # Build local copy of documentation
 #   -r requirements/docs.txt
 docs:
+	mkdir -p _build
 	#TODO
 
 # Run all tests
@@ -41,23 +41,24 @@ integration:
 # Build code coverage map
 #   -r requirements/tests.txt
 coverage:
+	mkdir -p _build
 	coverage run --rcfile=tests/.coveragerc -m pytest
 	# `make coverage-text` to view in console
 	# `make coverage-view` to view in web browser
 
 # Print coverage to console
 coverage-text: coverage
-	coverage report
+	coverage report --rcfile=tests/.coveragerc
 
 # Open coverage in browser
 coverage-html: coverage
-	coverage html
-	sensible-browser htmlcov/index.html
+	coverage html --rcfile=tests/.coveragerc
+	sensible-browser _build/htmlcov/index.html
 
 # Upload code coverage map to codacy
 # NOTE: Used by build system only
 #   -r requirements/tests.txt
-upload-coverage:
+upload-coverage: coverage
 	ifneq ($(CODACYCOV),no)
 		i#TODO
 	endif

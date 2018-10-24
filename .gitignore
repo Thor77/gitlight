@@ -1,7 +1,9 @@
+_build
+
 conf/*
 !conf/testing
+!conf/development
 !conf/production
-doc/_build/**
 
 *.py[co]
 *.sw

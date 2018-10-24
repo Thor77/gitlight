@@ -1,15 +1,13 @@
 [run]
 branch = True
 data_file = _build/.coverage
-include =
-    gitlight
 omit =
     */conf/*
     */lib/python*
 
 [report]
 ignore_errors = False
-sort = Miss
+sort = Cover
 
 [html]
 title = GitLight Code Coverage
