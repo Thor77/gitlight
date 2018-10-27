@@ -8,7 +8,7 @@ Build/Release
 
 Prep:
 
--   https://labs.play-with-docker.com/
+-   Open [Play w/ Docker](https://labs.play-with-docker.com/)
 -   Add new instance
 -   Connect via ssh
 -   Copy assets/dockerfile -> host:Dockerfile
@@ -21,7 +21,6 @@ This will show something like:
 
     Successfully built cbbedc85134f
                        ^-- <image-id>
-
 
 Deploy:
 

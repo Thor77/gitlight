@@ -2,9 +2,6 @@
 '''
 GitLight/Flask things for pytest
 '''
-import os
-import tempfile
-
 import pytest
 from gitlight import create_app
 
