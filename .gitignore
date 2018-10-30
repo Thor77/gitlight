@@ -5,6 +5,9 @@ conf/*
 !conf/development
 !conf/production
 
+.vagrant/*
+!.vagrant/bootstrap
+
 *.py[co]
 *.sw
 *~

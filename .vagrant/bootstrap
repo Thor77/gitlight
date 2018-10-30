@@ -1,0 +1,99 @@
+#!/bin/bash
+##
+# Set up a vagrant instance for development.
+##
+set -x
+
+##
+# Main
+##
+
+main() {
+	prep_home     || die 'Unable to configure home environment.'
+	update_system || die 'Unable to update systems.'
+	install_deps  || die 'Unable to install package dependencies.'
+	create_venv   || die 'Unable to create python virtual environment.'
+	pip_installs  || die 'Unable to install python dependencies.'
+	install_nginx || die 'Unable to install/configure nginx.'
+	clean_apt     || echo 'Unable to wipe apt cache.'
+	touch /.configured
+}
+
+##
+# Main functions
+##
+
+prep_home() {
+	ln -s /vagrant /home/vagrant/dev
+	cat >/home/vagrant/.bashrc <<-'EOF'
+		PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+		source ~/.venv/bin/activate
+		cd ~/dev
+		EOF
+}
+
+update_system() {
+	apt-get update
+	apt-get -y autoremove
+	apt-get -y -o Dpkg::Options::="--force-confdef" -o \
+		Dpkg::Options::="--force-confold" dist-upgrade
+}
+
+install_deps() {
+	apt-get update && apt-get install -y --no-install-recommends \
+		python3 python3-dev python-pip python3-virtualenv \
+		libssl-dev libpq-dev git build-essential libfontconfig1 \
+		libfontconfig1-dev python3-venv vim || return 1
+}
+
+clean_apt() {
+	apt-get clean && rm -rf /var/lib/apt/lists/* || return 1
+}
+
+create_venv() {
+	sudo -u vagrant python3 -m venv /home/vagrant/.venv || return 1
+}
+
+pip_installs() {
+	sudo -u vagrant -s -- <<-'EOF'
+		source /home/vagrant/.venv/bin/activate
+		pip3 install -r /vagrant/requirements/base.txt
+		pip3 install -r /vagrant/requirements/docs.txt
+		pip3 install -r /vagrant/requirements/tests.txt
+		EOF
+}
+
+install_nginx() {
+	apt-get install -y nginx || return 1
+	rm -f /etc/nginx/sites-enabled/default
+	cat >/etc/nginx/sites-enabled/gitlight <<-'EOF'
+		server {
+			listen 5070;
+			server_name git.gitlight.io default_server;
+			location / {
+				include proxy_params;
+				proxy_set_header X-Real-IP $remote_addr;
+				proxy_buffering off;
+				proxy_pass http://127.0.0.1:5000;
+			}
+		}
+		server {
+			listen 5071;
+			server_name docs.gitlight.io gitlight.io;
+			root /vagrant/_build/docs/;
+		}
+		EOF
+	service nginx restart
+}
+
+##
+# Helper Functions
+##
+
+die() {
+	[[ "$*" ]] && printf '*** %s ***' "$*"
+	exit 1
+}
+
+# Run main()
+main

@@ -2,7 +2,7 @@ GitLight Goals
 ==============
 
 GitLight is meant to be a simple and lightweight tool to make collaboration with
-gitolite3 easy and enjoyable. wikis and project boards features are out of scope
+gitolite3 easy and enjoyable. Wikis and project boards features are out of scope
 for this project. Although, it may be possible to write a pluggable interface to
 include additional features.
 

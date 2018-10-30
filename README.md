@@ -33,7 +33,7 @@ Until the website/docs become useful...
 
 -   [Drone CI](https://ci.gitlight.io/)
 -   [GL Docs](https://docs.gitlight.io/)
--   [GS Site](https://www.gitlight.io/)
+-   [GL Site](https://www.gitlight.io/)
 -   [Codacy](https://app.codacy.com/project/MTecknology/gitlight/dashboard)
 -   [Docker Hub](https://hub.docker.com/u/gitlight/dashboard/)
 -   [Live Instance](http://git.gitlight.io/)
