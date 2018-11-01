@@ -24,7 +24,6 @@ main() {
 ##
 
 prep_home() {
-	ln -s /vagrant /home/vagrant/dev
 	cat >/home/vagrant/.bashrc <<-'EOF'
 		PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 		source ~/.venv/bin/activate
@@ -57,9 +56,9 @@ create_venv() {
 pip_installs() {
 	sudo -u vagrant -s -- <<-'EOF'
 		source /home/vagrant/.venv/bin/activate
-		pip3 install -r /vagrant/requirements/base.txt
-		pip3 install -r /vagrant/requirements/docs.txt
-		pip3 install -r /vagrant/requirements/tests.txt
+		pip3 install -r /home/vagrant/dev/requirements/base.txt
+		pip3 install -r /home/vagrant/dev/requirements/docs.txt
+		pip3 install -r /home/vagrant/dev/requirements/tests.txt
 		EOF
 }
 
@@ -83,6 +82,7 @@ install_nginx() {
 			root /vagrant/_build/docs/;
 		}
 		EOF
+	sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 	service nginx restart
 }
 
