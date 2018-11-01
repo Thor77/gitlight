@@ -22,7 +22,7 @@ run:
 #   -r requirements/docs.txt
 docs:
 	mkdir -p _build
-	#TODO
+	sphinx-build docs/ _build/docs/
 
 # Run all tests
 #   -r requirements/tests.txt
@@ -60,5 +60,7 @@ coverage-html: coverage
 #   -r requirements/tests.txt
 upload-coverage: coverage
 	ifneq ($(CODACYCOV),no)
-		i#TODO
+		#TODO
 	endif
+
+.PHONY: clean run docs test unit integration coverage coverage-text coverage-html

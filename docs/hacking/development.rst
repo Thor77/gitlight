@@ -27,7 +27,9 @@ Linux users can [download a package or add a repository]
 keep virtualbox up to date. Virtualbox also supports [Windows, OSX, and Solaris]
 (https://www.virtualbox.org/wiki/Downloads).
 
-Installing the tools (on Linux):
+Installing the tools (on Debian):
+
+.. code:: bash
 
     apt-get install vagrant virtualbox-5.2  # or newer
 
@@ -44,22 +46,35 @@ needs to be installed:
 
 Run with:
 
+.. code:: bash
+
     vagrant up --provider virtualbox
 
 Log in to instance with:
 
+.. code:: bash
+
     vagrant ssh
 
-Test instances can be accessed at <http://localhost:8080/>.
+Test instances of the web application can be accessed at <http://localhost:5070/>.
+
+.. code:: bash
+
+    # run with
+    make run
+
+Built documentation can be accessed at <http://localhost:5070/>.
+
+.. code:: bash
+
+    # generate with
+    make docs
 
 Destroy with:
 
+.. code:: bash
+
     vagrant destroy
-
-Using LXC
-+++++++++
-
-# todo
 
 Python Virtualenv
 -----------------
@@ -69,9 +84,13 @@ Python Virtualenv
 
 Create a py3 venv with ``python3-venv``:
 
+.. code:: bash
+
     python3 -m venv ~/.venv
 
 Activate it using:
+
+.. code:: bash
 
     . ~/.venv/bin/activate
 
@@ -80,6 +99,8 @@ the system. Some of these installations will require compiling source code. The
 most common requisites are ``build-essential`` and ``python3-dev``.
 
 To install all dependencies, change your working directory to gitlight and run:
+
+.. code:: bash
 
     pip3 -r requirements/all.txt
 
@@ -91,6 +112,8 @@ Making Changes
 Making changes is best done in a personal repository with a dedicated branch.
 
 If you forked gitlight on github, then the process would look similar to this:
+
+.. code:: bash
 
     git clone git@github.com/username/gitlight
     cd gitlight
@@ -113,8 +136,12 @@ Running GitLight
 
 To run gitlight:
 
+.. code:: bash
+
     make run
 
 This will run a local server on port 5000:
+
+.. code:: bash
 
     http://127.0.0.1:5000/
