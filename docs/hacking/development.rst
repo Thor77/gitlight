@@ -44,33 +44,51 @@ needs to be installed:
 - Click Install, READ the license, choose your fate
 - Close this virtualbox instance (since it's root)
 
-Run with:
+Once virtualbox is installed and configured, vagrant can deploy an instance with:
 
 .. code:: bash
 
+    cd /path/to/gitlight
     vagrant up --provider virtualbox
 
-Log in to instance with:
+Vagrant Quickstart
+++++++++++++++++++
+
+When the image is deployed, a virtualenv is created. The vagrant user`s ``~/.bashrc``
+is modified so that logging in will load the virtualenv and change to the ``dev/``
+directory.
+
+Log in to an instance with:
 
 .. code:: bash
 
     vagrant ssh
 
-Test instances of the web application can be accessed at <http://localhost:5070/>.
+The image is configured to forward two ports:
+
+-   ``tcp/5070`` - gitlight application
+-   ``tcp/5071`` - gitlight documentation
+
+These can be reached by directing your browser to ``http://127.0.0.1:5070/``,
+adjusting the port number as appropriate.
+
+Documentation is static. Once built by ``make docs`` from the ``~/dev/`` directory,
+documentation will become available to the browser.
+
+The GitLight application is dynamic and requires a running app server to serve
+content. A development server can be launched using ``make run`` from the ``~/dev/``
+directory.
 
 .. code:: bash
 
-    # run with
-    make run
-
-Built documentation can be accessed at <http://localhost:5070/>.
-
-.. code:: bash
-
-    # generate with
+    # build documentation
     make docs
 
-Destroy with:
+    # run gitlight
+    make run
+
+After development is complete, or if something broke and can't be explained,
+destroying the box is easily accomplished with:
 
 .. code:: bash
 
