@@ -27,7 +27,9 @@ Linux users can [download a package or add a repository]
 keep virtualbox up to date. Virtualbox also supports [Windows, OSX, and Solaris]
 (https://www.virtualbox.org/wiki/Downloads).
 
-Installing the tools (on Linux):
+Installing the tools (on Debian):
+
+.. code:: bash
 
     apt-get install vagrant virtualbox-5.2  # or newer
 
@@ -42,24 +44,55 @@ needs to be installed:
 - Click Install, READ the license, choose your fate
 - Close this virtualbox instance (since it's root)
 
-Run with:
+Once virtualbox is installed and configured, vagrant can deploy an instance with:
 
+.. code:: bash
+
+    cd /path/to/gitlight
     vagrant up --provider virtualbox
 
-Log in to instance with:
+Vagrant Quickstart
+++++++++++++++++++
+
+When the image is deployed, a virtualenv is created. The vagrant user`s ``~/.bashrc``
+is modified so that logging in will load the virtualenv and change to the ``dev/``
+directory.
+
+Log in to an instance with:
+
+.. code:: bash
 
     vagrant ssh
 
-Test instances can be accessed at <http://localhost:8080/>.
+The image is configured to forward two ports:
 
-Destroy with:
+-   ``tcp/5070`` - gitlight application
+-   ``tcp/5071`` - gitlight documentation
+
+These can be reached by directing your browser to ``http://127.0.0.1:5070/``,
+adjusting the port number as appropriate.
+
+Documentation is static. Once built by ``make docs`` from the ``~/dev/`` directory,
+documentation will become available to the browser.
+
+The GitLight application is dynamic and requires a running app server to serve
+content. A development server can be launched using ``make run`` from the ``~/dev/``
+directory.
+
+.. code:: bash
+
+    # build documentation
+    make docs
+
+    # run gitlight
+    make run
+
+After development is complete, or if something broke and can't be explained,
+destroying the box is easily accomplished with:
+
+.. code:: bash
 
     vagrant destroy
-
-Using LXC
-+++++++++
-
-# todo
 
 Python Virtualenv
 -----------------
@@ -69,9 +102,13 @@ Python Virtualenv
 
 Create a py3 venv with ``python3-venv``:
 
+.. code:: bash
+
     python3 -m venv ~/.venv
 
 Activate it using:
+
+.. code:: bash
 
     . ~/.venv/bin/activate
 
@@ -80,6 +117,8 @@ the system. Some of these installations will require compiling source code. The
 most common requisites are ``build-essential`` and ``python3-dev``.
 
 To install all dependencies, change your working directory to gitlight and run:
+
+.. code:: bash
 
     pip3 -r requirements/all.txt
 
@@ -91,6 +130,8 @@ Making Changes
 Making changes is best done in a personal repository with a dedicated branch.
 
 If you forked gitlight on github, then the process would look similar to this:
+
+.. code:: bash
 
     git clone git@github.com/username/gitlight
     cd gitlight
@@ -113,8 +154,12 @@ Running GitLight
 
 To run gitlight:
 
+.. code:: bash
+
     make run
 
 This will run a local server on port 5000:
+
+.. code:: bash
 
     http://127.0.0.1:5000/
