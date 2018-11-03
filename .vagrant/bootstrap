@@ -25,7 +25,7 @@ main() {
 
 prep_home() {
 	cat >/home/vagrant/.bashrc <<-'EOF'
-		PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+		PS1='\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 		source ~/.venv/bin/activate
 		cd ~/dev
 		EOF
@@ -34,15 +34,24 @@ prep_home() {
 update_system() {
 	apt-get update
 	apt-get -y autoremove
-	apt-get -y -o Dpkg::Options::="--force-confdef" -o \
-		Dpkg::Options::="--force-confold" dist-upgrade
+	DEBIAN_FRONTEND=noninteractive apt-get -yq \
+		-o Dpkg::Options::="--force-confdef" \
+		-o Dpkg::Options::="--force-confold" \
+		dist-upgrade || return 1
 }
 
 install_deps() {
-	apt-get update && apt-get install -y --no-install-recommends \
+	apt-get update
+
+	# pip, venv, gitlight-deps
+	apt-get install -y --no-install-recommends \
 		python3 python3-dev python-pip python3-virtualenv \
 		libssl-dev libpq-dev git build-essential libfontconfig1 \
-		libfontconfig1-dev python3-venv vim || return 1
+		libfontconfig1-dev python3-venv || return 1
+
+	# extra utilities
+	apt-get install -y --no-install-recommends \
+		vim screen || return 1
 }
 
 clean_apt() {
@@ -95,5 +104,8 @@ die() {
 	exit 1
 }
 
+##
 # Run main()
+##
+
 main

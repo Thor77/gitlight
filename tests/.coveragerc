@@ -12,3 +12,6 @@ sort = Cover
 [html]
 title = GitLight Code Coverage
 directory = _build/htmlcov
+
+[xml]
+output = _build/coverage.xml
