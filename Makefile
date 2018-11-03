@@ -24,35 +24,25 @@ docs:
 	mkdir -p _build
 	sphinx-build docs/ _build/docs/
 
-# Run all tests
+# Run tests
 #   -r requirements/tests.txt
-test: unit integration
-
-# Run unit tests
-#   -r requirements/tests.txt
-unit:
+test:
 	pytest
-
-# Run unit integration
-#   -r requirements/tests.txt
-integration:
-	#TODO
 
 # Build code coverage map
 #   -r requirements/tests.txt
 coverage:
 	mkdir -p _build
 	coverage run --rcfile=tests/.coveragerc -m pytest
-	# `make coverage-text` to view in console
-	# `make coverage-view` to view in web browser
+	coverage html --rcfile=tests/.coveragerc
+	coverage xml --rcfile=tests/.coveragerc
 
 # Print coverage to console
-coverage-text: coverage
+cov-text: coverage
 	coverage report --rcfile=tests/.coveragerc
 
 # Open coverage in browser
-coverage-html: coverage
-	coverage html --rcfile=tests/.coveragerc
+cov-html: coverage
 	sensible-browser _build/htmlcov/index.html
 
 # Upload code coverage map to codacy
@@ -60,7 +50,8 @@ coverage-html: coverage
 #   -r requirements/tests.txt
 upload-coverage: coverage
 	ifneq ($(CODACYCOV),no)
-		#TODO
+		export CODACY_PROJECT_TOKEN=$(CODACYCOV)
+		python-codacy-coverage -r _build/coverage.xml
 	endif
 
-.PHONY: clean run docs test unit integration coverage coverage-text coverage-html
+.PHONY: clean run docs test coverage cov-text cov-html upload-coverage
