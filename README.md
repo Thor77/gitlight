@@ -4,7 +4,7 @@ GitLight
 GitLight is a simple/lightweight collaboration tool built on top of Gitolite3.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/gitlight/gitlight/master/assets/gitlight-logo.png" width="128px">
+<img src="https://raw.githubusercontent.com/gitlight/gitlight/develop/assets/gitlight-logo.png" width="128px">
 <p>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
