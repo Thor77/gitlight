@@ -8,9 +8,12 @@ clean:
 	@find . -name '*.pyc' \
 		-o -name '__pycache__' \
 		-o -name '.pytest_cache' \
-		-o -name '*,cover' \
 		-exec rm -rf {} +;
 	@rm -rf _build
+
+# Create an output directory
+_build:
+	@mkdir _build
 
 # Run a development web server
 #   -r requirements/base.txt
@@ -20,8 +23,7 @@ run:
 
 # Build local copy of documentation
 #   -r requirements/docs.txt
-docs:
-	mkdir -p _build
+docs: _build
 	sphinx-build docs/ _build/docs/
 
 # Run tests
@@ -29,29 +31,33 @@ docs:
 test:
 	pytest
 
+# Spell checker (pytest-spellcheck would be better)
+#   -r requirements/tests.txt
+spell: _build
+	find gitlight/ -name '*.py' | misspellings -f - | tee _build/spelling.txt
+
+# Lint checker
+#   -r requirements/tests.txt
+lint: _build
+	pylint --jobs=0 --persistent=n --reports=y gitlight | tee _build/lint.txt
+
 # Build code coverage map
 #   -r requirements/tests.txt
-coverage:
-	mkdir -p _build
-	coverage run --rcfile=tests/.coveragerc -m pytest
-	coverage html --rcfile=tests/.coveragerc
-	coverage xml --rcfile=tests/.coveragerc
+coverage: _build
+	pytest \
+		--cov-config tests/.coveragerc \
+		--cov-report=xml \
+		--cov-report=html \
+		--cov-report=term:skip-covered \
+		--cov=gitlight tests/ \
+			>_build/coverage.txt
 
 # Print coverage to console
 cov-text: coverage
-	coverage report --rcfile=tests/.coveragerc
+	awk '/- coverage:/{y=1;next}y' _build/coverage.txt
 
 # Open coverage in browser
 cov-html: coverage
 	sensible-browser _build/htmlcov/index.html
 
-# Upload code coverage map to codacy
-# NOTE: Used by build system only
-#   -r requirements/tests.txt
-upload-coverage: coverage
-	ifneq ($(CODACYCOV),no)
-		export CODACY_PROJECT_TOKEN=$(CODACYCOV)
-		python-codacy-coverage -r _build/coverage.xml
-	endif
-
-.PHONY: clean run docs test coverage cov-text cov-html upload-coverage
+.PHONY: clean run docs test spell lint coverage cov-text cov-html

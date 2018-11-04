@@ -8,8 +8,8 @@ Prerequisites:
 - Read our `Code of Conduct`_
 - Read our `Contribution Rules`_
 
-.. _Code of Conduct: https://github.com/gitlight/gitlight/blob/master/CODE_OF_CONDUCT.md
-.. _Contribution Rules: https://github.com/gitlight/gitlight/blob/master/.github/CONTRIBUTING.md
+.. _Code of Conduct: https://github.com/gitlight/gitlight/blob/develop/CODE_OF_CONDUCT.md
+.. _Contribution Rules: https://github.com/gitlight/gitlight/blob/develop/.github/CONTRIBUTING.md
 
 Vagrant Dev
 -----------
@@ -139,7 +139,7 @@ If you forked gitlight on github, then the process would look similar to this:
     git remote add upstream https://github.com/gitlight/gitlight
     git fetch --tags upstream
 
-    git branch -b my-changes upstream/master
+    git branch -b my-changes upstream/develop
 
 Changes can now be made on the ``my-changes`` branch.
 
@@ -147,7 +147,7 @@ When submitting a Pull Request, make sure to check the diff. If the wrong branch
 was selected, the changeset can be much larger than expected.
 
 Note: Only bug fixes will be backported to supported release branches. New features
-must be submitted to ``master``.
+must be submitted to ``develop``.
 
 Running GitLight
 ----------------

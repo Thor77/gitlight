@@ -7,48 +7,66 @@ platform:
 
 steps:
 
-  - name: tests_debian
+  - name: debian-tests
     image: gitlight/deb-stable-py3
     pull: true
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
       - make test
-    branches: master
     when:
       event: [ push, pull_request ]
 
-  #- name: lint
-  #  image: gitlight/deb-stable-py3
-  #  pull: true
-  #  commands:
-  #    - 'virtualenv /tmp/.venv'
-  #    - '. /tmp/.venv/bin/activate'
-  #    - 'pip install -r requirements/tests.txt'
-  #    - 'python ./manage.py tests'
-  #  branches: master
-  #  when:
-  #    event: [ push, pull_request ]
-
-  #- name: docs
-  #  image: gitlight/deb-stable-py3
-  #  pull: true
-  #  commands:
-  #    - 'virtualenv /tmp/.venv'
-  #    - '. /tmp/.venv/bin/activate'
-  #    - 'pip install -r requirements/docs.txt'
-  #    - 'python ./manage.py docs'
-  #  branches: master
-  #  when:
-  #    event: [ push, pull_request ]
-
-  - name: coverage
+  - name: lintcheck
     image: gitlight/deb-stable-py3
-    pull: true
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
-      - make coverage-text
-    branches: master
+      - make lint
+      - grep -q '^Your code.*10\.00/10' _build/lint.txt
     when:
       event: [ push, pull_request ]
+
+  - name: spellcheck
+    image: gitlight/deb-stable-py3
+    commands:
+      - . /venv/testenv/bin/activate
+      - pip3 install -r requirements/docs.txt
+      - make spell
+      - '[ ! -s _build/spelling.txt ]'
+    when:
+      event: [ push, pull_request ]
+
+  - name: documentation
+    image: gitlight/deb-stable-py3
+    commands:
+      - . /venv/testenv/bin/activate
+      - pip3 install -r requirements/docs.txt
+      - make docs
+    when:
+      event: [ push, pull_request ]
+
+  - name: coverage
+    image: gitlight/deb-stable-py3
+    commands:
+      - . /venv/testenv/bin/activate
+      - pip3 install -r requirements/tests.txt
+      - pip3 install codacy-coverage
+      - make coverage
+      - cat _build/coverage.txt
+      - grep -q '^TOTAL.*100%' _build/coverage.txt
+    when:
+      event: [ push, pull_request ]
+
+  - name: upload-coverage
+    image: gitlight/deb-stable-py3
+    commands:
+      - . /venv/testenv/bin/activate
+      - pip3 install -r requirements/tests.txt
+      - pip3 install codacy-coverage
+      - make coverage
+      #- export CODACY_PROJECT_TOKEN=
+      #- python-codacy-coverage -r _build/coverage.xml
+    branches: develop
+    when:
+      event: [ push ]

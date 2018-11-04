@@ -1,8 +1,8 @@
 '''
 GitLight Bootstrap
 '''
-import flask
 import os
+import flask
 
 
 def create_app(test_config=None):
