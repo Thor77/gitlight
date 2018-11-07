@@ -1,14 +1,7 @@
-kind: pipeline
-name: default
+pipeline:
 
-platform:
-  os: linux
-  arch: amd64
-
-steps:
-
-  - name: debian-tests
-    image: gitlight/deb-stable-py3
+  debian-tests:
+    image: gitlight/deb-testing-py3
     pull: true
     commands:
       - . /venv/testenv/bin/activate
@@ -17,8 +10,9 @@ steps:
     when:
       event: [ push, pull_request ]
 
-  - name: lintcheck
-    image: gitlight/deb-stable-py3
+  lintcheck:
+    group: checks
+    image: gitlight/deb-testing-py3
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
@@ -27,8 +21,9 @@ steps:
     when:
       event: [ push, pull_request ]
 
-  - name: spellcheck
-    image: gitlight/deb-stable-py3
+  spellcheck:
+    group: checks
+    image: gitlight/deb-testing-py3
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/docs.txt
@@ -37,8 +32,9 @@ steps:
     when:
       event: [ push, pull_request ]
 
-  - name: documentation
-    image: gitlight/deb-stable-py3
+  documentation:
+    group: checks
+    image: gitlight/deb-testing-py3
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/docs.txt
@@ -46,20 +42,20 @@ steps:
     when:
       event: [ push, pull_request ]
 
-  - name: coverage
-    image: gitlight/deb-stable-py3
+  coverage:
+    group: checks
+    image: gitlight/deb-testing-py3
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
-      - pip3 install codacy-coverage
       - make coverage
       - cat _build/coverage.txt
       - grep -q '^TOTAL.*100%' _build/coverage.txt
     when:
       event: [ push, pull_request ]
 
-  - name: upload-coverage
-    image: gitlight/deb-stable-py3
+  upload-coverage:
+    image: gitlight/deb-testing-py3
     commands:
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
@@ -67,6 +63,6 @@ steps:
       - make coverage
       #- export CODACY_PROJECT_TOKEN=
       #- python-codacy-coverage -r _build/coverage.xml
-    branches: develop
     when:
+      branch: develop
       event: [ push ]
