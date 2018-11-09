@@ -74,7 +74,7 @@ pip_installs() {
 install_nginx() {
 	apt-get install -y nginx || return 1
 	rm -f /etc/nginx/sites-enabled/default
-	cp /home/vagrant/.vagrant/files/nginx_conf /etc/nginx/sites-enabled/gitlight
+	cp /home/vagrant/dev/.vagrant/files/nginx_conf /etc/nginx/sites-enabled/gitlight
 	sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 	service nginx restart
 }
