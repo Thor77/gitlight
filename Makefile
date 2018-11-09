@@ -8,7 +8,7 @@ clean:
 	@find . -name '*.pyc' \
 		-o -name '__pycache__' \
 		-o -name '.pytest_cache' \
-		-exec rm -rf {} +;
+		-exec rm -rf {} \;
 	@rm -rf _build
 
 # Create an output directory

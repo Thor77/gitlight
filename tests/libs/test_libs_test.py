@@ -21,26 +21,32 @@ def test_sleep():
     '''
     Test sleep function.
     '''
+    # Require valid input
+    assert test.sleep(-1) == False
+
     # Function returns True
-    start = timit.default_timer()
-    assert test.sleep(5) == True
-    tik = (timit.default_timer() - start)
+    start = timeit.default_timer()
+    assert test.sleep(3) == True
+    tik = (timeit.default_timer() - start)
 
-    # Took longer than 3 seconds
-    assert tik > 3
+    # Took longer than 1 second
+    assert tik > 1
 
-    # Took less than 7 seconds
-    assert tik < 7
+    # Took less than 5 seconds
+    assert tik < 5
 
 
 def test_sleep_r():
     '''
     Test sleep_r function.
     '''
+    # Require valid input
+    assert test.sleep(-1) == False
+
     # Function returns True
-    start = timit.default_timer()
+    start = timeit.default_timer()
     assert test.sleep_r(3) == True
-    tik = (timit.default_timer() - start)
+    tik = (timeit.default_timer() - start)
 
     # Took time to return
     assert tik > 0

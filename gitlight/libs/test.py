@@ -19,9 +19,9 @@ def echo(text):
     return text
 
 
-def sleep(length):
+def sleep(seconds):
     '''
-    Pause execution for <length> seconds.
+    Pause execution for <seconds> seconds.
 
     Usage: 
 
@@ -29,13 +29,15 @@ def sleep(length):
 
         test.sleep(60)
     '''
-    time.sleep(int(length))
+    if int(seconds) <= 0:
+        return False
+    time.sleep(int(seconds))
     return True
 
 
-def sleep_r(max=60):
+def sleep_r(seconds=60):
     '''
-    Pause execution for a random amount of time, between 0 and <max> seconds.
+    Pause execution for a random amount of time, between 1 and <seconds> seconds.
 
     Usage: 
 
@@ -43,5 +45,7 @@ def sleep_r(max=60):
 
         test.sleep_r(180)
     '''
-    time.sleep(random.randint(0, max))
+    if int(seconds) <= 0:
+        return False
+    time.sleep(random.randint(1, seconds))
     return True
