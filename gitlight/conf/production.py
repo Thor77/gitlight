@@ -1,4 +1,5 @@
 #!/usr/ben/env python3
+# -*- coding: utf-8 -*-
 '''
 Production Settings
 '''
