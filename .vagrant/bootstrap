@@ -29,6 +29,8 @@ prep_home() {
 		source ~/.venv/bin/activate
 		cd ~/dev
 		EOF
+	cp /home/vagrant/dev/.vagrant/files/vimrc /home/vagrant/.vimrc
+	mkdir -p /home/vagrant/.vim/tmp/{undo,backup,swap}
 }
 
 update_system() {
