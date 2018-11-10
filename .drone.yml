@@ -4,7 +4,7 @@ pipeline:
     image: gitlight/deb-testing-py3
     pull: true
     commands:
-      - export LANG='en_US.UTF-8' PYTHONIOENCODING='utf8'
+      - export LANG='C.UTF-8'
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
       - make test
@@ -15,7 +15,7 @@ pipeline:
     group: checks
     image: gitlight/deb-testing-py3
     commands:
-      - export LANG='en_US.UTF-8' PYTHONIOENCODING='utf8'
+      - export LANG='C.UTF-8'
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
       - make lint
@@ -27,7 +27,7 @@ pipeline:
     group: checks
     image: gitlight/deb-testing-py3
     commands:
-      - export LANG='en_US.UTF-8' PYTHONIOENCODING='utf8'
+      - export LANG='C.UTF-8'
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/docs.txt
       - make spell
@@ -39,7 +39,7 @@ pipeline:
     group: checks
     image: gitlight/deb-testing-py3
     commands:
-      - export LANG='en_US.UTF-8' PYTHONIOENCODING='utf8'
+      - export LANG='C.UTF-8'
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/docs.txt
       - make docs
@@ -50,7 +50,7 @@ pipeline:
     group: checks
     image: gitlight/deb-testing-py3
     commands:
-      - export LANG='en_US.UTF-8' PYTHONIOENCODING='utf8'
+      - export LANG='C.UTF-8'
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
       - make coverage
@@ -62,7 +62,7 @@ pipeline:
   upload-coverage:
     image: gitlight/deb-testing-py3
     commands:
-      - export LANG='en_US.UTF-8' PYTHONIOENCODING='utf8'
+      - export LANG='C.UTF-8'
       - . /venv/testenv/bin/activate
       - pip3 install -r requirements/tests.txt
       - pip3 install codacy-coverage
