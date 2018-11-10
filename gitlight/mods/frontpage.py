@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
+==========
+Front Page
+==========
+
 Module for doing frontpage activities.
 '''
 # GitLight Imports

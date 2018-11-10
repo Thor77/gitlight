@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-GitLight Routes :: Front Page
+==========
+Front Page
+==========
+
+Basic route for handling the front page.
 '''
 # Python / Flask Imports
 import flask

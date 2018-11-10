@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-Module for running arbitrary tests
+====
+Test
+====
+
+Library for running arbitrary tests.
 '''
 import random
 import time
