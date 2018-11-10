@@ -42,7 +42,7 @@ def test_sleep_r():
     Test sleep_r function.
     '''
     # Require valid input
-    assert test.sleep(-1) == False
+    assert test.sleep_r(-1) == False
 
     # Function returns True
     start = timeit.default_timer()

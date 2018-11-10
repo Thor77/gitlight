@@ -1,0 +1,52 @@
+" Prefer removing over modifying
+
+""
+" Basic Options
+""
+
+set encoding=utf-8
+set modelines=0
+set autoindent
+set showmode
+set showcmd
+set hidden
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set number
+"set relativenumber
+set laststatus=2
+set history=1000
+set undofile
+set undoreload=1000
+"set list
+set shell=/bin/bash
+set lazyredraw
+set showbreak=⇲
+set splitbelow
+set splitright
+set autowrite
+set autoread
+set title
+set scrolloff=7
+syntax on
+
+""
+" Backups
+"   u:undo r:redo
+""
+
+set undodir=~/.vim/tmp/undo//
+set backupdir=~/.vim/tmp/backup//
+set directory=~/.vim/tmp/swap//
+set backup
+
+""
+" Irritating Keys
+""
+
+noremap  <F1> <nop>
+inoremap <F1> <nop>
+nnoremap K    <nop>
+inoremap #    X<BS>#

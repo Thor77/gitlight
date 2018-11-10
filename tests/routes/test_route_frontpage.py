@@ -5,11 +5,9 @@ Test frontpage routes
 '''
 
 
-def test_index():
+def test_index(client):
     '''
     Test that the homepage renders.
     '''
-    # TODO: Skipped (not working)
-    return 0
     response = client.get('/')
     assert b'GitLight' in response.data

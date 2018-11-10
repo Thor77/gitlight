@@ -24,22 +24,22 @@ main() {
 ##
 
 prep_home() {
-	cat >/home/vagrant/.bashrc <<-'EOF'
+	sv cat >>/home/vagrant/.bashrc <<-EOF
 		PS1='\[\033[01;33m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 		source ~/.venv/bin/activate
 		cd ~/dev
 		EOF
-	cp /home/vagrant/dev/.vagrant/files/vimrc /home/vagrant/.vimrc
-	mkdir -p /home/vagrant/.vim/tmp/{undo,backup,swap}
+	sv cp /home/vagrant/dev/.vagrant/files/vimrc /home/vagrant/.vimrc
+	sv mkdir -p /home/vagrant/.vim/tmp/{undo,backup,swap}
 }
 
 update_system() {
 	apt-get update
-	apt-get -y autoremove
 	DEBIAN_FRONTEND=noninteractive apt-get -yq \
 		-o Dpkg::Options::="--force-confdef" \
 		-o Dpkg::Options::="--force-confold" \
 		dist-upgrade || return 1
+	apt-get -y autoremove
 }
 
 install_deps() {
@@ -61,12 +61,13 @@ clean_apt() {
 }
 
 create_venv() {
-	sudo -u vagrant python3 -m venv /home/vagrant/.venv || return 1
+	sv python3 -m venv /home/vagrant/.venv || return 1
 }
 
 pip_installs() {
-	sudo -u vagrant -s -- <<-'EOF'
+	sv -s -- <<-EOF
 		source /home/vagrant/.venv/bin/activate
+		pip3 install --upgrade pip wheel
 		pip3 install -r /home/vagrant/dev/requirements/base.txt
 		pip3 install -r /home/vagrant/dev/requirements/docs.txt
 		pip3 install -r /home/vagrant/dev/requirements/tests.txt
@@ -88,6 +89,10 @@ install_nginx() {
 die() {
 	[[ "$*" ]] && printf '*** %s ***' "$*"
 	exit 1
+}
+
+sv() {
+	sudo -u vagrant $@
 }
 
 ##
