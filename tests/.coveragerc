@@ -6,6 +6,7 @@ omit =
     */lib/python*
 
 [report]
+show_missing = True
 ignore_errors = False
 sort = Cover
 

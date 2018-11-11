@@ -1,0 +1,16 @@
+server {
+	listen 5070;
+	server_name git.gitlight.io default_server;
+	location / {
+		include proxy_params;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_buffering off;
+		proxy_pass http://127.0.0.1:5000;
+	}
+}
+
+server {
+	listen 5071;
+	server_name docs.gitlight.io gitlight.io;
+	root /home/vagrant/dev/_build/docs/;
+}

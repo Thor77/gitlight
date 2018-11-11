@@ -8,11 +8,19 @@ Contents:
 .. toctree::
    :hidden:
    :includehidden:
-   :maxdepth: 2
+   :maxdepth: 4
 
    walkthrough/index
    hacking/index
+   ref/index
 
 .. warning::
 
     This documentation (and project) are currently under heavy initial development.
+
+
+:ref:`genindex`
+
+:ref:`modindex`
+
+:ref:`search`

@@ -25,8 +25,8 @@ This will show something like:
 Deploy:
 
     docker login --username=<username>
-    docker tag <image-id> gitlight/deb-stable-py3
-    docker push gitlight/deb-stable-py3
+    docker tag <image-id> gitlight/deb-testing-py3
+    docker push gitlight/deb-testing-py3
 
-Hurray, a new version of ``gitlight/deb-stable-py3`` has
+Hurray, a new version of ``gitlight/deb-testing-py3`` has
 been uploaded to Docker Hub!

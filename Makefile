@@ -5,10 +5,14 @@ export FLASK_APP FLASK_ENV CODACYCOV
 
 # Clean up build/cache data
 clean:
+	@# Python cache
 	@find . -name '*.pyc' \
 		-o -name '__pycache__' \
 		-o -name '.pytest_cache' \
-		-exec rm -rf {} +;
+		-exec rm -rvf {} \;
+	@# Generated documentation
+	@find docs/ref/ -mindepth 1 -type d -exec rm -rvf {} +;
+	@# Build artifacts
 	@rm -rf _build
 
 # Create an output directory
@@ -24,6 +28,9 @@ run:
 # Build local copy of documentation
 #   -r requirements/docs.txt
 docs: _build
+	for dir in libs mods routes; do \
+		sphinx-apidoc -fT -o docs/ref/$$dir/ gitlight/$$dir; \
+	done
 	sphinx-build docs/ _build/docs/
 
 # Run tests
